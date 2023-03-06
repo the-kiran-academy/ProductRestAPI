@@ -2,7 +2,6 @@ package com.jbk.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -12,7 +11,7 @@ public class Product {
 	private String productId;
 	private String productName;
 
-	@OneToMany
+	@OneToOne
 	private Supplier supplierId;
 
 	@OneToOne

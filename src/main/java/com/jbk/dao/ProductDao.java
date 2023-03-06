@@ -1,10 +1,10 @@
-package com.jbk.service;
+package com.jbk.dao;
 
 import java.util.List;
 
 import com.jbk.entity.Product;
 
-public interface ProductService {
+public interface ProductDao {
 	public boolean saveProduct(Product product);
 
 	public Product getProductById(String productId);
