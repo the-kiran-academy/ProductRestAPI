@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.jbk.dao.ProductDao;
 import com.jbk.entity.Product;
-import com.jbk.service.ProductService;
 
 @Service
-public class ProductServiceIMPL implements ProductService {
+public class ProductServiceIMPL implements ProductDao {
 	
 	@Autowired
 	private ProductDao dao;

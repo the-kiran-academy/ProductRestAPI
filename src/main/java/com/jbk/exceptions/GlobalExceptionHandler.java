@@ -33,10 +33,10 @@ public class GlobalExceptionHandler {
 	map.put("Time", new Date());
 	
 	
-	BindingResult bindingResult = ex.getBindingResult();
-	
-	List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-	
+//	BindingResult bindingResult = ex.getBindingResult();
+//	
+//	List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+//	
 //	for (FieldError fieldError : fieldErrors) {
 //		
 //		map.put(fieldError.getField(), fieldError.getDefaultMessage());
