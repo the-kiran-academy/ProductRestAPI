@@ -6,6 +6,6 @@ public interface CategoryService {
 	
 	public boolean saveCategory(Category category);
 	public Category getCategoryById(int id);
-	public Category getCAtegoryByName( String name);
+	public Category getCategoryByName( String name);
 
 }

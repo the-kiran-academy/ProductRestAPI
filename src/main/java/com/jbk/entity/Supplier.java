@@ -1,18 +1,27 @@
 package com.jbk.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Supplier {
 	@Id
+	@Column(unique = true, nullable = false)
 	private int supplierId;
+
+	@Column(unique = true, nullable = false)
 	private String supplierName;
+
+	@Column(nullable = false)
 	private String city;
+	@Column(nullable = false)
 	private int postalCode;
+	@Column(nullable = false)
 	private String country;
+	@Column(unique = true, nullable = false)
 	private String mobileNo;
-	
+
 	public Supplier() {
 		// TODO Auto-generated constructor stub
 	}
@@ -80,8 +89,5 @@ public class Supplier {
 		return "Supplier [supplierId=" + supplierId + ", supplierName=" + supplierName + ", city=" + city
 				+ ", postalCode=" + postalCode + ", country=" + country + ", mobileNo=" + mobileNo + "]";
 	}
-	
-	
-	
-	
+
 }

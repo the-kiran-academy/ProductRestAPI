@@ -2,9 +2,11 @@ package com.jbk.daoIMPL;
 
 import javax.persistence.RollbackException;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,11 +33,9 @@ public class CategoryDaoIMPL implements CategoryDao {
 			session.save(category);
 			transaction.commit();
 			isAdded = true;
-		} 
-		catch (RollbackException e) {
+		} catch (RollbackException e) {
 			System.out.println(" rollback Duplicate Entry");
-		}
-		catch (DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			System.out.println("Duplicate Entry");
 		} catch (Exception e) {
 			System.out.println();
@@ -49,14 +49,28 @@ public class CategoryDaoIMPL implements CategoryDao {
 
 	@Override
 	public Category getCategoryById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Category category = null;
+		try (Session session = sessionFactory.openSession();) {
+			category = session.get(Category.class, id);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return category;
 	}
 
 	@Override
-	public Category getCAtegoryByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Category getCategoryByName(String name) {
+		Category category = null;
+		try (Session session = sessionFactory.openSession();) {
+			Criteria criteria = session.createCriteria(Category.class);
+			criteria.add(Restrictions.eq("categoryName", name));
+			category = (Category) criteria.uniqueResult();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return category;
 	}
 
 }

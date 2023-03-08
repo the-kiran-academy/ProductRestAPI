@@ -9,7 +9,7 @@ import com.jbk.service.CategoryService;
 
 @Service
 public class CategoryServiceIMPL implements CategoryService {
-	
+
 	@Autowired
 	private CategoryDao dao;
 
@@ -21,14 +21,12 @@ public class CategoryServiceIMPL implements CategoryService {
 
 	@Override
 	public Category getCategoryById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getCategoryById(id);
 	}
 
 	@Override
-	public Category getCAtegoryByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Category getCategoryByName(String name) {
+		return dao.getCategoryByName(name);
 	}
 
 }

@@ -1,19 +1,30 @@
 package com.jbk.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Category {
-	
+
 	@Id
+	@Column(unique = true, nullable = false)
 	private int categoryId;
+
+	@Column(unique = true, nullable = false)
 	private String categoryName;
+
 	private String discription;
-	private float discount;
-	private int gst;
-	private double deliveryCharge;
 	
+	@Column(nullable = false)
+	private float discount;
+	
+	@Column(nullable = false)
+	private int gst;
+	
+	@Column(nullable = false)
+	private double deliveryCharge;
+
 	public Category() {
 	}
 
@@ -81,7 +92,5 @@ public class Category {
 		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", discription=" + discription
 				+ ", discount=" + discount + ", gst=" + gst + ", deliveryCharge=" + deliveryCharge + "]";
 	}
-	
-	
 
 }
