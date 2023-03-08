@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.jbk.dao.ProductDao;
 import com.jbk.entity.Product;
+import com.jbk.model.Charges;
+import com.jbk.model.FinalProduct;
+import com.jbk.service.ProductService;
 
 @Service
-public class ProductServiceIMPL implements ProductDao {
+public class ProductServiceIMPL implements ProductService {
 	
 	@Autowired
 	private ProductDao dao;
@@ -86,6 +89,36 @@ public class ProductServiceIMPL implements ProductDao {
 	public String exportSheet() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public FinalProduct getFinalProductById(String productId) {
+		Product product = dao.getProductById(productId);
+
+		FinalProduct finalProduct = new FinalProduct();
+
+		Charges charges = new Charges();
+		charges.setGst(product.getCategory().getGst());
+		charges.setDeliveryCharge(product.getCategory().getDeliveryCharge());
+
+		// calculate
+
+		double discountAmount = (product.getProductPrice() * product.getCategory().getDiscount()) / 100;
+		double gstAmount = (product.getProductPrice() * product.getCategory().getGst()) / 100;
+
+		finalProduct.setProductId(productId);
+		finalProduct.setProductName(product.getProductName());
+		finalProduct.setSupplier(product.getSupplier());
+		finalProduct.setCategory(product.getCategory());
+		finalProduct.setProductQTY(product.getProductQTY());
+		finalProduct.setProductPrice(product.getProductPrice());
+		finalProduct.setCharges(charges);
+
+		finalProduct.setDiscountAmount(discountAmount);
+		finalProduct.setFinalProductPrice(
+				(product.getProductPrice() + gstAmount + product.getCategory().getDeliveryCharge()) - discountAmount);
+
+		return finalProduct;
 	}
 
 }

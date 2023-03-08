@@ -16,6 +16,7 @@ import com.jbk.entity.Category;
 import com.jbk.entity.Product;
 import com.jbk.exceptions.ResourceAlreadyExistsException;
 import com.jbk.exceptions.ResourceNotExistsException;
+import com.jbk.model.FinalProduct;
 import com.jbk.service.ProductService;
 
 @RestController
@@ -32,7 +33,6 @@ public class ProductController {
 			return new ResponseEntity<Boolean>(isAdded, HttpStatus.CREATED);
 		}else {
 			 throw new ResourceAlreadyExistsException("Product Already Exists With Product Name  = "+product.getProductName());
-			//return new ResponseEntity<Boolean>(isAdded, HttpStatus.OK);
 		}
 	}
 	
@@ -43,7 +43,17 @@ public class ProductController {
 			return new ResponseEntity<>(product, HttpStatus.OK);
 		} else {
 			 throw new ResourceNotExistsException("Product Not Found For Id = "+id);
-			//return new ResponseEntity<>(product, HttpStatus.NO_CONTENT);
+
+		}
+	}
+	
+	@GetMapping(value = "/get-finalproduct-by-id/{id}")
+	public ResponseEntity<FinalProduct> getFinalProductById(@PathVariable String id) {
+		FinalProduct product = service.getFinalProductById(id);
+		if (product != null) {
+			return new ResponseEntity<>(product, HttpStatus.OK);
+		} else {
+			 throw new ResourceNotExistsException("Product Not Found For Id = "+id);
 
 		}
 	}

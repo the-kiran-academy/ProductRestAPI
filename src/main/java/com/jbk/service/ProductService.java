@@ -3,11 +3,14 @@ package com.jbk.service;
 import java.util.List;
 
 import com.jbk.entity.Product;
+import com.jbk.model.FinalProduct;
 
 public interface ProductService {
 	public boolean saveProduct(Product product);
 
 	public Product getProductById(String productId);
+
+	public FinalProduct getFinalProductById(String productId);
 
 	public List<Product> getAllProducts();
 
